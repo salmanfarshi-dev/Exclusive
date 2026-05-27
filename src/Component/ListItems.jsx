@@ -2,7 +2,7 @@ import React from 'react'
 
 function ListItems({text}) {
   return (
-    <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list">{text}</li>
+    <li tabindex='0' className="font-normal text-[16px] list-none  font-poppins cursor-pointer list">{text}</li>
   )
 }
 

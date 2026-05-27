@@ -23,6 +23,13 @@
     bottom: -1px;
     transition: 0.4s ease;
 }
+
 .list:hover:after{
+    background: #DB4444;
+    color: #DB4444;
     width: 100%;
 }
+.active{
+    color: #DB4444;
+}
+

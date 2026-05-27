@@ -7,6 +7,10 @@ import FooterList from '../Component/FooterList';
 import QR from '../assets/Qr Code.png'
 import Playstore from '../assets/GooglePlay.png'
 import Downloadstore from '../assets/download-appstore.png'
+import { LiaFacebookF } from "react-icons/lia";
+import { FiTwitter } from "react-icons/fi";
+import { FaInstagram } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
 
 
 function Footer() {
@@ -69,6 +73,13 @@ function Footer() {
                         <Image src={Downloadstore} alt=""/>
                     </div>
                     
+                 </div>
+                 <div className="flex gap-x-6 mt-6">
+                  <LiaFacebookF  className='text-white size-6 hover:scale-105 duration-300 cursor-pointer'/>
+                  <FiTwitter  className='text-white size-6 hover:scale-105 duration-300 cursor-pointer'/>
+                  <FaInstagram  className='text-white size-6 hover:scale-105 duration-300 cursor-pointer'/>
+                  <FaLinkedinIn className='text-white size-6 hover:scale-105 duration-300 cursor-pointer' />
+
                  </div>
              
             </div>

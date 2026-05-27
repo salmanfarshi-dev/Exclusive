@@ -2,7 +2,7 @@ import React from 'react'
 import Container from '../Component/Container'
 import Image from '../Component/Image'
 import Logo from '../assets/Logo.png'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { GrCart } from "react-icons/gr";
@@ -12,17 +12,17 @@ import { GrCart } from "react-icons/gr";
 function Navbar() {
   return (
 
-   <nav className=" mt-[47px] mb-[23px]">
+   <nav className=" mt-[47px] mb-[23px] border-b pb-[16px] border-[#8282824d] ">
     <Container>
         <div className="flex justify-between items-center">
             <div className="">
                 <Image src={Logo} alt="Logo"/>
             </div>
             <div className="flex items-center gap-x-[48px]">
-                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/home">Home</Link> </li>
-                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/contact">Contact</Link> </li>
-                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/about">About</Link> </li>
-                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/signUp">Sign Up</Link> </li>
+                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink to="/home">Home</NavLink> </li>
+                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink to="/contact">Contact</NavLink> </li>
+                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink to="/about">About</NavLink> </li>
+                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink to="/signUp">Sign Up</NavLink> </li>
             </div>
             <div className="flex gap-x-6 items-center">
                 <div className="input-group relative w-full">

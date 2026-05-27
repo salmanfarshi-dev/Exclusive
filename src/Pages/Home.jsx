@@ -1,12 +1,20 @@
 import React from 'react'
+import Banner from '../Layout/Banner'
+import FlashSales from '../Layout/FlashSales'
 
 
 function Home() {
   return (
   <>
-  <h1 className="">Home</h1>
+  
+
+  <Banner/>
+  <FlashSales/>
+  
+
+  
   </>
   )
 }
 
-export default Home
+export default Home;
