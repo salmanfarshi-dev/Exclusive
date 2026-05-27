@@ -20,9 +20,9 @@ function Navbar() {
             </div>
             <div className="flex items-center gap-x-[48px]">
                 <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/home">Home</Link> </li>
-                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/Contact">Contact</Link> </li>
-                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/About">About</Link> </li>
-                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/Sign Up">Sign Up</Link> </li>
+                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/contact">Contact</Link> </li>
+                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/about">About</Link> </li>
+                <li className="font-normal text-[16px] list-none text-black font-poppins cursor-pointer list"> <Link to="/signUp">Sign Up</Link> </li>
             </div>
             <div className="flex gap-x-6 items-center">
                 <div className="input-group relative w-full">

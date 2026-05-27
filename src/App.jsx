@@ -5,19 +5,21 @@ import RootLayout from './Component/Rootlayout'
 import Contact from './Pages/Contact'
 import About from './Pages/About'
 import SignUp from './Pages/SignUp'
+import Error from './Component/Error'
 
 function App() {
   return (
     <>
-    <BrowserRouter>
+    <BrowserRouter basename='/Exclusive/'>
     <Routes>
       <Route path='/' element={<RootLayout/> }>
-      <Route path="/Home" element={<Home />} />
-      <Route path='/Contact' element={ <Contact/>}/>
-      <Route path='/About' element={<About/>}/>
-      <Route path='/Sign Up' element={ <SignUp/>}/>
-
-
+      <Route index element={<Home />} />
+      <Route path="home" element={<Home />} />
+      <Route path='contact' element={ <Contact/>}/>
+      <Route path='about' element={<About/>}/>
+      <Route path='signUp' element={ <SignUp/>}/>
+      <Route path='*' element={ <Error/> }/>
+    
       </Route>
     </Routes>
     </BrowserRouter>
