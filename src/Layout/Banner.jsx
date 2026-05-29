@@ -1,10 +1,23 @@
-import Container from '../Component/Container'
 import React from 'react'
+import Container from '../Component/Container'
 import Bannerlist from '../Component/Bannerlist'
 import BannerImage from '../assets/bannerImage.jpg'
-import Image from '../Component/Image'
+import CustomImage from '../Component/Image'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Banner() {
+    const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear"
+  };
   return (
    <section className='pt-10 pb-[110px]'>
     <Container>
@@ -24,14 +37,19 @@ function Banner() {
         </div>
         
         </div>
-        <div className="w-9/12">
-        <Image src={BannerImage}/>
 
+
+        <div className="w-9/12">
+        
+        
+        
         </div>
+
+
         </div>
     </Container>
    </section>
   )
 }
 
-export default Banner
+export default Banner;
