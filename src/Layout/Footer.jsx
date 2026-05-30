@@ -15,9 +15,9 @@ import { FaLinkedinIn } from "react-icons/fa";
 
 function Footer() {
   return (
-   <footer className='bg-black pt-[80px] pb-[60px]'>
+   <footer className='bg-black pt-[80px] pb-[60px] '>
     <Container>
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between border-b border-gray-800 pb-16">
             <div className="">
               <Image src={Footerlogo} alt="Logo"/>
               <h3 className="text-secondary text-xl font-medium py-6">Subscribe</h3>
@@ -86,6 +86,7 @@ function Footer() {
             </div>
            
         </div>
+        <p className='text-center text-gray-700  text-[16px] pt-4'>Copyright Rimel 2022. All right reserved</p>
     </Container>
    </footer>
   )

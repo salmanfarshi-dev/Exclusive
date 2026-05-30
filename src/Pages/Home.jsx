@@ -5,6 +5,8 @@ import BrowseCategory from '../Layout/BrowseCategory';
 import SellingProducts from '../Layout/SellingProducts';
 import MusicEx from '../Layout/MusicEx';
 import Product from '../Layout/Product';
+import NewArrival from '../Layout/NewArrival';
+import Services from '../Layout/Services';
 
 
 function Home() {
@@ -18,6 +20,8 @@ function Home() {
   <SellingProducts/>
   <MusicEx/>
   <Product/>
+  <NewArrival/>
+  <Services/>
   
 
   
