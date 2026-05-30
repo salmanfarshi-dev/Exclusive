@@ -1,8 +1,11 @@
 import React from 'react'
+import Sign from '../Layout/Sign'
 
 function SignUp() {
   return (
-    <div>SignUp </div>
+    <>
+    <Sign/>
+    </>
   )
 }
 

@@ -6,6 +6,7 @@ import Contact from './Pages/Contact'
 import About from './Pages/About'
 import SignUp from './Pages/SignUp'
 import Error from './Component/Error'
+import Login from './Pages/Login'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path='contact' element={ <Contact/>}/>
       <Route path='about' element={<About/>}/>
       <Route path='signUp' element={ <SignUp/>}/>
+      <Route path='login' element={ <Login/> }/>
       <Route path='*' element={ <Error/> }/>
     
       </Route>
