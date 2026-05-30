@@ -5,13 +5,13 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaStar } from "react-icons/fa6";
 
 
-function Cards({src, alt,badge, tittle, discount, regular}) {
+function Cards({src, alt,badge, tittle, discount, regular,list, className,ReclassName, listClassName}) {
   return (
     <div>
       <div className="w-[270px] group  cursor-pointer">
         <div className="bg-[#F5F5F5] w-[270px] h-[250px] flex justify-center items-center relative rounded-[4px] overflow-hidden">
           <img src={src} alt={alt} />
-          <p className="bg-primary text-secondary py-1 px-3 text-xs font-normal rounded-[4px] absolute top-3 left-3">
+          <p className={`bg-primary text-secondary py-1 px-3 text-xs font-normal rounded-[4px] absolute top-3 left-3 ${className}`}>
           {badge}
           </p>
           <div className="absolute flex flex-col gap-y-2 top-3 right-3">
@@ -28,9 +28,10 @@ function Cards({src, alt,badge, tittle, discount, regular}) {
           </div>
         </div>
         <h3 className="text-[16px] font-medium text-black mt-4">{tittle}</h3>
-        <p className="text-primary text-[16px] font-medium my-2">${discount} <span className="line-through text-black text-opacity-50 ml-3">${regular}</span></p>
+       <div className={`${listClassName}`}>
+         <p className="text-primary text-[16px] font-medium my-2">${discount} <span className={`line-through text-black text-opacity-50 ml-3 ${ReclassName}`}>${regular}</span></p>
 
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-2 ">
            <div className="flex items-center gap-x-2">
              <FaStar className="text-[#FFAD33]"/>
             <FaStar className="text-[#FFAD33]"/>
@@ -38,8 +39,9 @@ function Cards({src, alt,badge, tittle, discount, regular}) {
             <FaStar className="text-[#FFAD33]"/>
             <FaStar className="text-[#FFAD33]"/>
            </div>
-      <p className="text-black text-opacity-50 text-[14px] font-semibold">(88)</p>
+      <p className="text-black text-opacity-50 text-[14px] font-semibold">({list})</p>
         </div>
+       </div>
       </div>
     </div>
   );

@@ -32,4 +32,6 @@
 .active{
     color: #DB4444;
 }
-
+.swiper-pagination-bullet-active {
+  background: white !important;
+}
