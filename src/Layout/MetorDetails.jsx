@@ -9,11 +9,12 @@ import Mentor from "../Component/Mentor";
 import Cruise from "../assets/cruise.png";
 import Watson from "../assets/watson.png";
 import Smith from "../assets/smith.png";
+import Rafik from "../assets/rafik.png";
 import '../index.css'
 
 function MetorDetails() {
   return (
-    <section className="mb-[196px] relative">
+    <section className="mb-[136px] ">
       <Container>
         <Swiper
           slidesPerView={3}
@@ -24,7 +25,7 @@ function MetorDetails() {
           }}
           navigation={false}
           modules={[Pagination, Navigation]}
-          className="mySwiper absolute bottom-[-40px]"
+          className="mySwipers relative !pb-[70px] "
         >
           <SwiperSlide>
             <Mentor
@@ -36,7 +37,7 @@ function MetorDetails() {
           <SwiperSlide>
             <Mentor
               src={Watson}
-              name="JEmma Watson"
+              name="Emma Watson"
               identifier="Managing Director"
             />
           </SwiperSlide>
@@ -49,9 +50,9 @@ function MetorDetails() {
           </SwiperSlide>
           <SwiperSlide>
             <Mentor
-              src={Smith}
-              name="Will Smith"
-              identifier="Product Designer"
+              src={Rafik}
+              name="Rafik"
+              identifier="Product Manager"
             />
           </SwiperSlide>
         </Swiper>
