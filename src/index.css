@@ -35,3 +35,11 @@
 .swiper-pagination-bullet-active {
   background: white !important;
 }
+
+.mySwiper .swiper-pagination-bullet {
+  background: gray !important;
+}
+
+.mySwiper .swiper-pagination-bullet-active {
+  background: red !important;
+}

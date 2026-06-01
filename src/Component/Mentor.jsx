@@ -11,11 +11,11 @@ function Mentor({ name, identifier, src }) {
       </div>
       <h6 className="font-medium text-[32px] font-inter tracking-[4%] mt-8 mb-2 text-black">{name}</h6>
       <p className="text-[16px] text-black font-normal mb-[16px]">{identifier}</p>
-      <div className=" flex gap-x-[16px]">
-        <FiTwitter className="text-white size-6 hover:scale-105 duration-300 cursor-pointer" />
-        <FaInstagram className="text-white size-6 hover:scale-105 duration-300 cursor-pointer" />
-        <FaLinkedinIn className="text-white size-6 hover:scale-105 duration-300 cursor-pointer" />
-      </div>
+      <div className="flex gap-x-[16px]">
+  <FiTwitter className="text-black size-6 hover:scale-105 duration-300 cursor-pointer" />
+  <FaInstagram className="text-black size-6 hover:scale-105 duration-300 cursor-pointer" />
+  <FaLinkedinIn className="text-black size-6 hover:scale-105 duration-300 cursor-pointer" />
+</div>
     </div>
   );
 }
