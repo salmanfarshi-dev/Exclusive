@@ -7,6 +7,7 @@ import About from './Pages/About'
 import SignUp from './Pages/SignUp'
 import Error from './Component/Error'
 import Login from './Pages/Login'
+import ProductsDetaisl from './Pages/ProductsDetaisl'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path='about' element={<About/>}/>
       <Route path='signUp' element={ <SignUp/>}/>
       <Route path='login' element={ <Login/> }/>
+      <Route path='products' element={ <ProductsDetaisl/> }/>
       <Route path='*' element={ <Error/> }/>
     
       </Route>

@@ -1,10 +1,12 @@
 import React from 'react'
+import ContactMe from '../Layout/ContactMe'
+
 
 function Contact() {
   return (
    <>
-   
-<h1 className="">contact</h1>
+ 
+  <ContactMe/>
    </>
   )
 }
