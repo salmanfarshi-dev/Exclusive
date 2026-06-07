@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,sendEmailVerification  } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import {signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
@@ -86,10 +86,20 @@ function Sign() {
 
       createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    toast.success("Registation successfully")
+     sendEmailVerification(auth.currentUser)
+          .then(() => {
+            toast.success("Please check your email")
+             setTimeout(() => {
+     navigate('/login')
+   }, 2000);
+           
+            
+          });
     setName("")
     setEmail("")
     setPassword("")
+   
+  
     
   })
   .catch((error) => {
@@ -98,6 +108,7 @@ function Sign() {
       toast.error("Email already used")
     }
     const errorMessage = error.message;
+     toast.error(error.message);
   
   });
     }

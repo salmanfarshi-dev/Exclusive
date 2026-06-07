@@ -47,7 +47,7 @@ function SellingProducts() {
           <Cards ReclassName="hidden"
             src={Bookself}
             tittle="Small BookSelf"
-            regular=""
+            regular="750"
             discount="360"
             list="65"
             className="hidden"
