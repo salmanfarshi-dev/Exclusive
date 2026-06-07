@@ -26,7 +26,7 @@ function FlashSales() {
        </div>
 
         <div className="mt-10 flex justify-between items-center">
-        <div className="grid grid-cols-4 gap-5">
+        <div className="flex justify-between flex-wrap gap-6">
   {ApiData.slice(0, show).map((item) => (
     <Cards
       key={item.id}

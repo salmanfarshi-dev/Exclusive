@@ -8,50 +8,39 @@ import Coat from "../assets/coat.png";
 import Bag from "../assets/bag.png";
 import Cpu from "../assets/cpu.png";
 import Bookself from "../assets/booksells.png";
+import { useState } from "react";
+import BestSellingApi from '../BestSellingApi'
 
 function SellingProducts() {
+
+  let [show, setShow] = useState(4)
   return (
     <section>
       <Container>
         <Today text="This Month" />
         <div className="flex justify-between items-center mt-5">
           <Subheading text="Best Selling Products" />
-          <Button text="View All" />
+          {
+            show<BestSellingApi.length && <Button onClick={()=>setShow(show+4)} text="View All" />
+          }
         </div>
 
         <div className="flex justify-between items-center mt-16 mb-[140px]">
-          <Cards
-            src={Coat}
-            tittle="The north coat"
-            regular="360"
-            discount="260"
-            list="65"
-            className="hidden"
-          />
-          <Cards
-            src={Bag}
-            tittle="Gucci duffle bag"
-            regular="1160"
-            discount="960"
-            list="60"
-            className="hidden"
-          />
-          <Cards
-            src={Cpu}
-            tittle="RGB liquid CPU Cooler"
-            regular="170"
-            discount="160"
-            list="65"
-            className="hidden"
-          />
-          <Cards ReclassName="hidden"
-            src={Bookself}
-            tittle="Small BookSelf"
-            regular="750"
-            discount="360"
-            list="65"
-            className="hidden"
-          />
+           <div className="flex flex-wrap justify-between gap-6">
+  {BestSellingApi.slice(0, show).map((item) => (
+    <Cards
+    className="hidden"
+      key={item.id}
+      src={item.image}
+      tittle={item.tittle}
+      
+      discount={item.discount}
+      regular={item.regular}
+      list={item.list}
+    />
+  ))}
+</div>
+         
         </div>
       </Container>
     </section>
