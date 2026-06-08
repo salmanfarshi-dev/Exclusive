@@ -10,6 +10,7 @@ import Login from './Pages/Login'
 import ProductsDetaisl from './Pages/ProductsDetaisl'
 import Account from './Pages/Account'
 import CheckOut from './Pages/CheckOut'
+import Card from './Pages/Card'
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
       <Route path='products' element={ <ProductsDetaisl/> }/>
       <Route path='account' element={ <Account/> }/>
       <Route path="checkout" element={ <CheckOut/> }/>
+      <Route  path="card" element={ <Card/>}/>
       <Route path='*' element={ <Error/> }/>
     
       </Route>

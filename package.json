@@ -1,6 +1,7 @@
 {
   "name": "exclusive",
   "private": true,
+   "homepage": "https://salmanfarsi-dev.github.io/Exclusive-name",
   "version": "0.0.0",
   "type": "module",
   "engines": {
@@ -11,6 +12,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
