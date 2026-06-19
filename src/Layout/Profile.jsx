@@ -13,7 +13,7 @@ function Profile() {
     <section className='mt-20 mb-[140px]'>
         <Container>
             <div className="flex justify-between items-center mb-20">
-                 <Nextpage prev={prev} current={next} />
+               <Nextpage  prevPath={prev === "Home" ? "/" : `/${prev.toLowerCase()}`}  prev={prev} current={next}  />
 
                 <p className='text-[14px] font-normal text-black'>Welcome !<span className='text-primary'>Shifa Islam Srity</span></p>
             </div>

@@ -14,7 +14,7 @@ function ContactMe() {
   return (
     <section className="mt-20">
       <Container>
-        <Nextpage prev={prev} current={next} />
+      <Nextpage  prevPath={prev === "Home" ? "/" : `/${prev.toLowerCase()}`}  prev={prev} current={next}  />
 
         <div className="grid grid-cols-12 gap-x-8 mt-20 mb-[140px]">
           <div className="col-span-4 ">

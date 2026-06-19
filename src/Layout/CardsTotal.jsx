@@ -7,6 +7,7 @@ import Input from "../Component/Input";
 import Button from '@mui/material/Button';
 import ButtonTwo from "../Component/Button"
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 
@@ -21,7 +22,7 @@ function CardsTotal() {
   return (
     <section className="mt-20 mb-[140px]">
       <Container>
-        <Nextpage prev={prev} current={next} />
+        <Nextpage  prevPath={prev === "Home" ? "/" : `/${prev}`}  prev={prev} current={next}  />
 
         <div className="mt-20">
           <div className="mb-[64px] flex justify-between px-10 py-6">

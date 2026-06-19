@@ -19,7 +19,7 @@ function DelivaryDetails() {
   return (
     <section className="mt-20 mb-[140px]">
       <Container>
-          <Nextpage prev={prev} current={next} className="mt-20 mb-[140px]" />
+         <Nextpage  prevPath={prev === "Home" ? "/" : `/${prev.toLowerCase()}`}  prev={prev} current={next} className="mt-20 mb-[140px]" />
         <Subheading text="Billing Details" />
         <div className="grid grid-cols-12 mt-12">
           <div className="col-span-6 w-[450px]">

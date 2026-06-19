@@ -10,7 +10,7 @@ function Story() {
   return (
    <section>
      <Container>
-        <Nextpage prev={prev} current={next} className="mt-20 mb-[42px]" />
+      <Nextpage  prevPath={prev === "Home" ? "/" : `/${prev.toLowerCase()}`}  prev={prev} current={next}  className="mt-20 mb-[42px]"/>
 
         
     </Container>
