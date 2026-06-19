@@ -4,13 +4,16 @@ import Nextpage from '../Component/Nextpage'
 import Input  from '../Component/Input'
 import Button from '@mui/material/Button';
 import Buttontwo from '../Component/Button'
+import { useSelector } from 'react-redux';
 
 function Profile() {
+    let prev = useSelector((state)=>(state.bradcrumb.previousvalue));
+     let next = useSelector((state)=>(state.bradcrumb.currentvalue));
   return (
     <section className='mt-20 mb-[140px]'>
         <Container>
             <div className="flex justify-between items-center mb-20">
-                <Nextpage prev="Home" current="My Account"/>
+                 <Nextpage prev={prev} current={next} />
 
                 <p className='text-[14px] font-normal text-black'>Welcome !<span className='text-primary'>Shifa Islam Srity</span></p>
             </div>

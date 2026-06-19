@@ -10,11 +10,16 @@ import Visacard from '../assets/visa.png'
 import Bkash from '../assets/bkash.png'
 import Nogat from '../assets/nogat.png'
 import MasterCard from '../assets/mastercard.png'
+import { useSelector } from "react-redux";
+import Nextpage from '../Component/Nextpage'
 
 function DelivaryDetails() {
+    let prev = useSelector((state)=>(state.bradcrumb.previousvalue));
+  let next = useSelector((state)=>(state.bradcrumb.currentvalue));
   return (
     <section className="mt-20 mb-[140px]">
       <Container>
+          <Nextpage prev={prev} current={next} className="mt-20 mb-[140px]" />
         <Subheading text="Billing Details" />
         <div className="grid grid-cols-12 mt-12">
           <div className="col-span-6 w-[450px]">

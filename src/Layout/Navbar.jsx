@@ -2,14 +2,28 @@ import React from 'react'
 import Container from '../Component/Container'
 import Image from '../Component/Image'
 import Logo from '../assets/Logo.png'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { GrCart } from "react-icons/gr";
+import { useDispatch } from 'react-redux'
+import { addbradcrumb } from '../Slices/bradcrumb'
 
 
 
 function Navbar() {
+
+let dispatch = useDispatch()
+
+
+
+
+const handleBreadcrumb=(name)=>{
+     console.log("CLICKED:", name)
+    dispatch(addbradcrumb(name))
+
+}
+
   return (
 
    <nav className=" mt-[47px] mb-[23px] border-b pb-[16px] border-[#8282824d] ">
@@ -19,10 +33,10 @@ function Navbar() {
                 <Image src={Logo} alt="Logo"/>
             </div>
             <div className="flex items-center gap-x-[48px]">
-                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink to="/home">Home</NavLink> </li>
-                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink to="/contact">Contact</NavLink> </li>
-                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink to="/about">About</NavLink> </li>
-                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink to="/signUp">Sign Up</NavLink> </li>
+                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink onClick={()=>handleBreadcrumb("Home")} to="/home">Home</NavLink> </li>
+                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink onClick={()=>handleBreadcrumb("Contact")} to="/contact">Contact</NavLink> </li>
+                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink onClick={()=>handleBreadcrumb("About")} to="/about">About</NavLink> </li>
+                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink onClick={()=>handleBreadcrumb("Sign Up")} to="/signUp">Sign Up</NavLink> </li>
             </div>
             <div className="flex gap-x-6 items-center">
                 <div className="input-group relative w-full">
@@ -31,7 +45,7 @@ function Navbar() {
 
                 </div>
                 <AiOutlineHeart className='size-[32px]'/>
-                <GrCart className='size-[32px]'/>
+               <Link onClick={()=>handleBreadcrumb("Card")} to="/card"> <GrCart className='size-[25px] cursor-pointer'/></Link>
 
 
             </div>

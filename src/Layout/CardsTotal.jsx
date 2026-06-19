@@ -6,16 +6,22 @@ import Gamepad from "../assets/gamepad.png";
 import Input from "../Component/Input";
 import Button from '@mui/material/Button';
 import ButtonTwo from "../Component/Button"
+import { useSelector } from "react-redux";
 
 
 
 
 function CardsTotal() {
+
+  let prev = useSelector((state)=>(state.bradcrumb.previousvalue));
+  let next = useSelector((state)=>(state.bradcrumb.currentvalue));
+  
+
   const [quantity, setQuantity] = useState(2);
   return (
     <section className="mt-20 mb-[140px]">
       <Container>
-        <Nextpage prev="Home" current="Card" />
+        <Nextpage prev={prev} current={next} />
 
         <div className="mt-20">
           <div className="mb-[64px] flex justify-between px-10 py-6">
@@ -28,17 +34,14 @@ function CardsTotal() {
           <div className="mt-10 flex flex-col gap-y-10">
             <div className="px-10 py-6 bg-white shadow-[0_0_10px_rgba(0,0,0,0.3)] flex items-center ">
               <div className="flex gap-x-5 items-center">
-                <div className="">
-                  <Image
-                    src={Gamepad}
-                    className="w-[54px] h-[54px] object-cover"
-                  />
-                </div>
+              
+                  <Image src={Gamepad} alt="image" className="w-[100px]" />
+                
                 <p className="text-[16px] text-black font-normal">
                   LCD Monitor
                 </p>
               </div>
-              <p className="text-[16px] text-black font-normal pl-[177px]">$550</p>
+              <p className="text-[16px] text-black font-normal pl-[250px]">$550</p>
               <Input
                 type="number"
                 min="0"
@@ -61,7 +64,7 @@ function CardsTotal() {
           <div className="flex justify-between items-start">
             <div className="flex gap-x-4 items-center">
               <Input placeholder="Coupon Code" className="w-[300px] py-4 px-4 text-[16px] border border-black/80 rounded-[4px]"/>
-              <ButtonTwo text="Apply Coupon" className="!py-3"/>
+              <ButtonTwo text="Apply Coupon" className="!py-1"/>
 
             </div>
 

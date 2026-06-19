@@ -5,12 +5,16 @@ import { IoCallOutline } from "react-icons/io5";
 import { MdOutlineEmail } from "react-icons/md";
 import Input from '../Component/Input'
 import Button from '../Component/Button'
+import { useSelector } from "react-redux";
 
 function ContactMe() {
+   let prev = useSelector((state)=>(state.bradcrumb.previousvalue));
+  let next = useSelector((state)=>(state.bradcrumb.currentvalue));
+ 
   return (
     <section className="mt-20">
       <Container>
-        <Nextpage prev="Home" current="Contact" />
+        <Nextpage prev={prev} current={next} />
 
         <div className="grid grid-cols-12 gap-x-8 mt-20 mb-[140px]">
           <div className="col-span-4 ">
