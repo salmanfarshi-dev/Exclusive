@@ -11,6 +11,7 @@ import ProductsDetaisl from './Pages/ProductsDetaisl'
 import Account from './Pages/Account'
 import CheckOut from './Pages/CheckOut'
 import Card from './Pages/Card'
+import Shop from './Pages/Shop'
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
       <Route path='/' element={<RootLayout/> }>
       <Route index element={<Home />} />
       <Route path="home" element={<Home />} />
+      <Route path='shop' element={ <Shop/> } />
       <Route path='contact' element={ <Contact/>}/>
       <Route path='about' element={<About/>}/>
       <Route path='signUp' element={ <SignUp/>}/>
@@ -27,6 +29,7 @@ function App() {
       <Route path='account' element={ <Account/> }/>
       <Route path="checkout" element={ <CheckOut/> }/>
       <Route  path="card" element={ <Card/>}/>
+
       <Route path='*' element={ <Error/> }/>
     
       </Route>
