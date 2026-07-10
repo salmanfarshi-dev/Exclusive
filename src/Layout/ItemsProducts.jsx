@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "../Component/Container";
 import Image from "../Component/Image";
 import Gamepadone from "../assets/gamepad1 (1).png";
@@ -12,33 +12,54 @@ import Button from "../Component/Button";
 import { FaRegHeart } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
 import Icondelivary from '../assets/icon-return.png'
-
+import { useParams } from "react-router-dom";
 
 
 function ItemsProducts() {
   const [size, setSize] = useState("");
+  const [singleproduct, setSingleProduct] = useState([])
+  let param = useParams()
+
+useEffect(() => {
+  fetch(`https://dummyjson.com/products/${param.id}`)
+    .then((res) => res.json())
+    .then((data) => setSingleProduct([data]));
+}, [param.id]);
+console.log(singleproduct);
+
+
+
+
+
+
+
+
+
+
   return (
     <section className="mt-20 mb-[140px]">
       <Container>
-        <div className="flex gap-x-[100px] ">
+       {
+        singleproduct.map(item=>(
+           <div className="flex gap-x-[100px] ">
           <div className="flex gap-x-8">
             <div className=" flex flex-col gap-y-4 ">
-              <div className="w-[170px] h-[138px] flex justify-center items-center px-6 py-3 bg-secondary rounded-[4px]">
-                <Image src={Gamepadone} alt="image" />
-              </div>
-              <div className="w-[170px] h-[138px] flex justify-center items-center px-6 py-3 bg-secondary rounded-[4px]">
-                <Image src={Gamepadtwo} alt="image" />
-              </div>
-              <div className="w-[170px] h-[138px] flex justify-center items-center px-6 py-3 bg-secondary rounded-[4px]">
-                <Image src={Gamepadthree} alt="image" />
-              </div>
-              <div className="w-[170px] h-[138px] flex justify-center items-center px-6 py-3 bg-secondary rounded-[4px]">
-                <Image src={Gamepadfour} alt="image" />
-              </div>
+           {
+  item.images?.map((item2, index) => (
+    <div
+      key={index}
+      className="w-[170px] h-[138px] flex justify-center items-center px-6 py-3 bg-secondary rounded-[4px]"
+    >
+      <Image src={item2} alt="image" />
+    </div>
+  ))
+}
+             
+             
             </div>
             <div className=" ">
               <div className="w-[500px] h-[600px] flex justify-center items-center bg-secondary rounded-[4px]">
-                <Image src={Gamepadd} alt="image" />
+                <Image src={item.thumbnail} alt="image" />
               </div>
             </div>
           </div>
@@ -46,7 +67,7 @@ function ItemsProducts() {
           <div className="">
             <div className="">
               <h4 className="font-semibold font-inter text-[24px] tracking-[3%] text-black leading-6">
-                Havic HV G-92 Gamepad{" "}
+               {item.title} {" "}
               </h4>
               <div className="flex my-4 gap-x-2">
                 <div className="flex gap-x-1">
@@ -61,18 +82,16 @@ function ItemsProducts() {
                 </p>
 
                 <span className="text-[14px] text-[#00FF66] font-normal pl-2">
-                  In Stock
+                  In Stock {item.stock}
                 </span>
               </div>
 
               <p className="text-[24px] font-normal font-inter tracking-[3%] text-black">
-                $192.00
+                ${item.discountPercentage}
               </p>
 
               <p className="text-[14px] leading-5 text-black font-normal py-6 border-b-2 border-black border-opacity-50">
-                PlayStation 5 Controller Skin High quality vinyl with air
-                channel adhesive for easy bubble free install & mess free
-                removal Pressure sensitive.
+                {item.description}
               </p>
 
               <p className="flex items-center text-xl my-6 ">
@@ -114,7 +133,7 @@ function ItemsProducts() {
                   <div className="text-[30px] w-16  border border-black border-opacity-50 flex items-center justify-center">0</div>
                   <div className="border border-black border-opacity-50 w-10  flex items-center justify-center rounded-r hover:bg-primary hover:text-white duration-300 hover:border-transparent text-[30px] cursor-pointer">+</div>
                 </div>
-                <Button text="Bye Now" className="!py-[10px]"/>
+                <Button text="Buy Now" className="!py-[10px]"/>
                 <div className="w-10 h-10 border border-black rounded-[4px] flex justify-center items-center">
                   <FaRegHeart className="text-[20px]"/>
 
@@ -146,6 +165,8 @@ function ItemsProducts() {
             </div>
           </div>
         </div>
+        ))
+       }
       </Container>
     </section>
   );

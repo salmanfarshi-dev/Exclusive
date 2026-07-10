@@ -4,11 +4,13 @@ import Today from "../Component/Today";
 import Subheading from "../Component/Subheading";
 import Cards from "../Component/Cards";
 import Button from "../Component/Button";
+import { useParams } from "react-router-dom";
 
 function Product() {
   let [data, setData] = useState([]);
   let [show, setShow] = useState(4);
 
+  let param = useParams()
 
   // back er api use 
 
@@ -32,6 +34,7 @@ function Product() {
           <div className="flex flex-wrap  items-center gap-[30px]">
             {data.slice(0, show).map((item) => (
               <Cards
+                id={item.id}
                 src={item.thumbnail}
                 tittle={item.title}
                 regular={item.price}

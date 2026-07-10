@@ -3,11 +3,13 @@ import Button from "../Component/Button";
 import { FaRegHeart } from "react-icons/fa6";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaStar } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 
-function Cards({src, alt,badge, tittle, discount, regular,list, className,ReclassName, listClassName}) {
+function Cards({id,src, alt,badge, tittle, discount, regular,list, className,ReclassName, listClassName}) {
   return (
     <div>
+      <Link to={`/products/${id}`}>
       <div className="w-[270px] group  cursor-pointer">
         <div className="bg-[#F5F5F5] w-[270px] h-[250px] flex justify-center items-center relative rounded-[4px] overflow-hidden">
           <img src={src} alt={alt} />
@@ -43,6 +45,7 @@ function Cards({src, alt,badge, tittle, discount, regular,list, className,Reclas
         </div>
        </div>
       </div>
+      </Link>
     </div>
   );
 }
