@@ -1,61 +1,137 @@
-import React from 'react'
-import Container from '../Component/Container'
-import Image from '../Component/Image'
-import Logo from '../assets/Logo.png'
-import { Link, NavLink } from 'react-router-dom'
+import React, { useState } from "react";
+import Container from "../Component/Container";
+import Image from "../Component/Image";
+import Logo from "../assets/Logo.png";
+import { Link, NavLink } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { GrCart } from "react-icons/gr";
-import { useDispatch } from 'react-redux'
-import { addbradcrumb } from '../Slices/bradcrumb'
+import { useDispatch } from "react-redux";
+import { addbradcrumb } from "../Slices/bradcrumb";
+import { BsPerson } from "react-icons/bs";
+import Images from '../assets/monitor.png'
+
+
+
+
 
 
 
 function Navbar() {
+  let dispatch = useDispatch();
+  const [dropdown, setDrodown] = useState(false);
+  const [carddropdown , setCardDropDown] = useState(false)
 
-let dispatch = useDispatch()
-
-
-
-
-const handleBreadcrumb=(name)=>{
-     console.log("CLICKED:", name)
-    dispatch(addbradcrumb(name))
-
-}
+  const handleBreadcrumb = (name) => {
+    console.log("CLICKED:", name);
+    dispatch(addbradcrumb(name));
+  };
 
   return (
-
-   <nav className=" mt-[47px] mb-[23px] border-b pb-[16px] border-[#8282824d] ">
-    <Container>
+    <nav className=" mt-[47px] mb-[23px] border-b pb-[16px] border-[#8282824d] ">
+      <Container>
         <div className="flex justify-between items-center">
-            <div className="">
-                <Image src={Logo} alt="Logo"/>
+          <div className="">
+            <Image src={Logo} alt="Logo" />
+          </div>
+          <div className="flex items-center gap-x-[48px]">
+            <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list">
+              {" "}
+              <NavLink onClick={() => handleBreadcrumb("Home")} to="/home">
+                Home
+              </NavLink>{" "}
+            </li>
+            <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list">
+              {" "}
+              <NavLink
+                onClick={() => handleBreadcrumb("Contact")}
+                to="/contact"
+              >
+                Contact
+              </NavLink>{" "}
+            </li>
+            <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list">
+              {" "}
+              <NavLink onClick={() => handleBreadcrumb("About")} to="/about">
+                About
+              </NavLink>{" "}
+            </li>
+            <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list">
+              {" "}
+              <NavLink onClick={() => handleBreadcrumb("Sign Up")} to="/signUp">
+                Sign Up
+              </NavLink>{" "}
+            </li>
+          </div>
+          <div className="flex gap-x-6 items-center">
+            <div className="input-group relative w-full">
+              <input
+                type="text"
+                placeholder="What are you looking for?"
+                className="py-2 px-5 bg-[#F5F5F5] border border-transparent focus:outline-none hover:border-gray-300 rounded-[4px] duration-300 placeholder:text-[12px] pr-9"
+              />
+              <FiSearch className="absolute top-3 right-8" />
             </div>
-            <div className="flex items-center gap-x-[48px]">
-                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink onClick={()=>handleBreadcrumb("Home")} to="/home">Home</NavLink> </li>
-                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink onClick={()=>handleBreadcrumb("Contact")} to="/contact">Contact</NavLink> </li>
-                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink onClick={()=>handleBreadcrumb("About")} to="/about">About</NavLink> </li>
-                <li className="font-normal text-[16px] list-none text-black hover:text-[#DB4444] font-poppins cursor-pointer list"> <NavLink onClick={()=>handleBreadcrumb("Sign Up")} to="/signUp">Sign Up</NavLink> </li>
+            <AiOutlineHeart className="size-[38px]" />
+            
+             <div onClick={()=>setCardDropDown(!carddropdown)} className="relative">
+                 <GrCart className="size-[25px] cursor-pointer" />
+
+                 {
+                    carddropdown &&
+                     <div   className="absolute top-10 w-[400px] z-50 -left-40 bg-gray-400 rounded-[10px] py-4">
+                    <ul className="grid grid-cols-12   pb-3 px-3  text-white font-semibold text-sm border-b">
+                        <li className="col-span-3">Image</li>
+                        <li className="col-span-3">Name</li>
+                        <li className="col-span-3"> Quantity</li>
+                        <li className="col-span-3">Subtotal</li>
+                    </ul>
+                    <div className="flex flex-col gap-y-3 w-full h-[70vh] scroll overflow-y-auto hide-scrollbar">
+                         <ul className="grid grid-cols-12  mt-4 px-3 mt- text-white font-normal text-xs items-center">
+                        <li className="col-span-3">
+                            <img src={Images} alt="" className="w-10 h-10 object-cover"/>
+                        </li>
+                        <li className="col-span-3">product name</li>
+                        <li className="col-span-3 border border-white px-3 py-1 w-fit mx-auto"> 
+
+                            <button className="mr-2">-</button>
+                            <button>1</button>
+                            <button className="ml-2">+</button>
+                        </li>
+                        <li className="col-span-3">subtotal</li>
+                    </ul>
+                        
+                    </div>
+                 </div>
+                 }
+             </div>
+            
+            <div
+              onClick={() => setDrodown(!dropdown)}
+              className="relative h-[28px] w-[28px] p-1 flex justify-center items-center bg-red-500 rounded-full cursor-pointer"
+            >
+              <BsPerson className="text-white size-[22px]" />
+
+              {dropdown && (
+                <ul className="absolute top-9 -left-20 w-36 rounded bg-red-400 py-2 shadow-lg z-20">
+                 <Link to="/login">
+                  <li className="px-3 py-2 text-white hover:bg-red-500 cursor-pointer">
+                    Login
+                  </li>
+                 </Link>
+                  <Link to="/signUp">
+                   <li className="px-3 py-2 text-white hover:bg-red-500 cursor-pointer">
+                    Registration
+                  </li>
+                  </Link>
+                </ul>
+              )}
             </div>
-            <div className="flex gap-x-6 items-center">
-                <div className="input-group relative w-full">
-                    <input type="text" placeholder='What are you looking for?' className='py-2 px-5 bg-[#F5F5F5] border border-transparent focus:outline-none hover:border-gray-300 rounded-[4px] duration-300 placeholder:text-[12px] pr-9'/>
-                    <FiSearch className='absolute top-3 right-8'/>
-
-                </div>
-                <AiOutlineHeart className='size-[32px]'/>
-               <Link onClick={()=>handleBreadcrumb("Card")} to="/card"> <GrCart className='size-[25px] cursor-pointer'/></Link>
-
-
-            </div>
-           
+          </div>
         </div>
-        
-    </Container>
-   </nav>
-
-  )
+      </Container>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

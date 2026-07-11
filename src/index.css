@@ -44,3 +44,11 @@
   background: red !important;
 }
 
+.scroll.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -12,10 +12,13 @@ import Account from './Pages/Account'
 import CheckOut from './Pages/CheckOut'
 import Card from './Pages/Card'
 import Shop from './Pages/Shop'
+import ScrollToTop from './Component/ScrollToTop'
 function App() {
   return (
     <>
     <BrowserRouter basename='/Exclusive/'>
+
+    <ScrollToTop/>
     <Routes>
       <Route path='/' element={<RootLayout/> }>
       <Route index element={<Home />} />

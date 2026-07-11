@@ -13,17 +13,23 @@ import { FaRegHeart } from "react-icons/fa";
 import { TbTruckDelivery } from "react-icons/tb";
 import Icondelivary from '../assets/icon-return.png'
 import { useParams } from "react-router-dom";
-
+import LoadingImage from '../assets/bird-wings-flying-feature.gif'
 
 function ItemsProducts() {
   const [size, setSize] = useState("");
+  const [loading, setLoading] = useState(true)
   const [singleproduct, setSingleProduct] = useState([])
   let param = useParams()
 
 useEffect(() => {
+
+  
   fetch(`https://dummyjson.com/products/${param.id}`)
     .then((res) => res.json())
-    .then((data) => setSingleProduct([data]));
+    .then((data) => {
+      setSingleProduct([data])
+      setLoading(false)
+    });
 }, [param.id]);
 console.log(singleproduct);
 
@@ -32,7 +38,14 @@ console.log(singleproduct);
 
 
 
-
+if(loading){
+  return (
+     <section className=" absolute top-0 left-0 z-50 w-full h-screen bg-gray-100 flex justify-center items-center">
+    <img src={LoadingImage} alt="loading......" className="object-cover" />
+  </section>
+  )
+ 
+}
 
 
 
