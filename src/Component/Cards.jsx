@@ -4,12 +4,33 @@ import { FaRegHeart } from "react-icons/fa6";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { CardSlice } from "../Slices/addToCartSlice";
 
 
 function Cards({id,src, alt,badge, tittle, discount, regular,list, className,ReclassName, listClassName}) {
+
+let data= useSelector(state=>state.cartitem.cartvalue)
+console.log(data);
+
+
+
+let dispatch = useDispatch()
+
+const handleAddCart=()=>{
+   
+  dispatch(CardSlice({
+    tittle:tittle,
+    image:src,
+    price: discount,
+    quantity:1
+  }))
+}
+
+
   return (
     <div>
-      <Link to={`/products/${id}`}>
+      
       <div className="w-[270px] group  cursor-pointer">
         <div className="bg-[#F5F5F5] w-[270px] h-[250px] flex justify-center items-center relative rounded-[4px] overflow-hidden">
           <img src={src} alt={alt} />
@@ -25,7 +46,7 @@ function Cards({id,src, alt,badge, tittle, discount, regular,list, className,Rec
 
             </p>
           </div>
-          <div className="w-full bg-black rounded-b-[4px] absolute bottom-[-40px] left-0 text-center group-hover:bottom-0 duration-300">
+          <div onClick={handleAddCart} className="w-full bg-black rounded-b-[4px] absolute bottom-[-40px] left-0 text-center group-hover:bottom-0 duration-300">
             <p className="text-white py-2">Add To Cart</p>
           </div>
         </div>
@@ -45,7 +66,7 @@ function Cards({id,src, alt,badge, tittle, discount, regular,list, className,Rec
         </div>
        </div>
       </div>
-      </Link>
+      
     </div>
   );
 }

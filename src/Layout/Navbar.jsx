@@ -6,10 +6,11 @@ import { Link, NavLink } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { GrCart } from "react-icons/gr";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addbradcrumb } from "../Slices/bradcrumb";
 import { BsPerson } from "react-icons/bs";
 import Images from '../assets/monitor.png'
+import { CardSlice, decrementcart, incrementcart } from "../Slices/addToCartSlice";
 
 
 
@@ -18,12 +19,29 @@ import Images from '../assets/monitor.png'
 
 
 function Navbar() {
+
+
+let data= useSelector(state=>state.cartitem.cartvalue)
+console.log(data);
+
+
+const handleIncrement=(item)=>{
+  dispatch(incrementcart(item))
+}
+
+const handleDecrement=(item)=>{
+  dispatch(decrementcart(item))
+
+}
+
+
+
   let dispatch = useDispatch();
   const [dropdown, setDrodown] = useState(false);
   const [carddropdown , setCardDropDown] = useState(false)
 
   const handleBreadcrumb = (name) => {
-    console.log("CLICKED:", name);
+  
     dispatch(addbradcrumb(name));
   };
 
@@ -79,7 +97,7 @@ function Navbar() {
 
                  {
                     carddropdown &&
-                     <div   className="absolute top-10 w-[400px] z-50 -left-40 bg-gray-400 rounded-[10px] py-4">
+                     <div onClick={(e) => e.stopPropagation()}  className="absolute top-10 w-[400px] z-20 -left-40 bg-gray-400 rounded-[10px] py-4">
                     <ul className="grid grid-cols-12   pb-3 px-3  text-white font-semibold text-sm border-b">
                         <li className="col-span-3">Image</li>
                         <li className="col-span-3">Name</li>
@@ -87,19 +105,23 @@ function Navbar() {
                         <li className="col-span-3">Subtotal</li>
                     </ul>
                     <div className="flex flex-col gap-y-3 w-full h-[70vh] scroll overflow-y-auto hide-scrollbar">
-                         <ul className="grid grid-cols-12  mt-4 px-3 mt- text-white font-normal text-xs items-center">
+                         {
+                          data.map(item=>(
+                            <ul  key={item.id} className="grid grid-cols-12  mt-4 px-3  text-white font-normal text-xs items-center">
                         <li className="col-span-3">
-                            <img src={Images} alt="" className="w-10 h-10 object-cover"/>
+                            <img src={item.image} alt="" className="w-12 h-12 object-cover"/>
                         </li>
-                        <li className="col-span-3">product name</li>
+                        <li className="col-span-3 w-20 truncate">{item.tittle}</li>
                         <li className="col-span-3 border border-white px-3 py-1 w-fit mx-auto"> 
 
-                            <button className="mr-2">-</button>
-                            <button>1</button>
-                            <button className="ml-2">+</button>
+                            <button onClick={()=>handleDecrement(item)} className="mr-2">-</button>
+                            <button>{item.quantity}</button>
+                            <button onClick={()=>handleIncrement(item)} className="ml-2">+</button>
                         </li>
-                        <li className="col-span-3">subtotal</li>
+                        <li className="col-span-3 w-20 truncate">$ {item.price*item.quantity}</li>
                     </ul>
+                          ))
+                         }
                         
                     </div>
                  </div>
@@ -113,7 +135,7 @@ function Navbar() {
               <BsPerson className="text-white size-[22px]" />
 
               {dropdown && (
-                <ul className="absolute top-9 -left-20 w-36 rounded bg-red-400 py-2 shadow-lg z-20">
+                <ul  className="absolute top-9 -left-20 w-36 rounded bg-red-400 py-2 shadow-lg z-20">
                  <Link to="/login">
                   <li className="px-3 py-2 text-white hover:bg-red-500 cursor-pointer">
                     Login
