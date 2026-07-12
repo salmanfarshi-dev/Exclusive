@@ -9,41 +9,43 @@ import { GrCart } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { addbradcrumb } from "../Slices/bradcrumb";
 import { BsPerson } from "react-icons/bs";
-import Images from '../assets/monitor.png'
-import { CardSlice, decrementcart, incrementcart } from "../Slices/addToCartSlice";
-
-
-
-
-
-
+import Images from "../assets/monitor.png";
+import {
+  CardSlice,
+  decrementcart,
+  deletecart,
+  incrementcart,
+} from "../Slices/addToCartSlice";
+import { IoClose } from "react-icons/io5";
 
 function Navbar() {
+  let data = useSelector((state) => state.cartitem.cartvalue);
+  console.log(data);
 
+  const handleIncrement = (item) => {
+    dispatch(incrementcart(item));
+  };
 
-let data= useSelector(state=>state.cartitem.cartvalue)
-console.log(data);
-
-
-const handleIncrement=(item)=>{
-  dispatch(incrementcart(item))
-}
-
-const handleDecrement=(item)=>{
-  dispatch(decrementcart(item))
-
-}
-
-
+  const handleDecrement = (item) => {
+    dispatch(decrementcart(item));
+  };
+  const handledeletecart = (item) => {
+    dispatch(deletecart(item));
+  };
 
   let dispatch = useDispatch();
   const [dropdown, setDrodown] = useState(false);
-  const [carddropdown , setCardDropDown] = useState(false)
+  const [carddropdown, setCardDropDown] = useState(false);
 
   const handleBreadcrumb = (name) => {
-  
     dispatch(addbradcrumb(name));
   };
+
+  let total = 0;
+
+  data.forEach((item) => {
+    total += item.price * item.quantity;
+  });
 
   return (
     <nav className=" mt-[47px] mb-[23px] border-b pb-[16px] border-[#8282824d] ">
@@ -91,43 +93,90 @@ const handleDecrement=(item)=>{
               <FiSearch className="absolute top-3 right-8" />
             </div>
             <AiOutlineHeart className="size-[38px]" />
-            
-             <div onClick={()=>setCardDropDown(!carddropdown)} className="relative">
-                 <GrCart className="size-[25px] cursor-pointer" />
 
-                 {
-                    carddropdown &&
-                     <div onClick={(e) => e.stopPropagation()}  className="absolute top-10 w-[400px] z-20 -left-40 bg-gray-400 rounded-[10px] py-4">
-                    <ul className="grid grid-cols-12   pb-3 px-3  text-white font-semibold text-sm border-b">
-                        <li className="col-span-3">Image</li>
-                        <li className="col-span-3">Name</li>
-                        <li className="col-span-3"> Quantity</li>
-                        <li className="col-span-3">Subtotal</li>
-                    </ul>
-                    <div className="flex flex-col gap-y-3 w-full h-[70vh] scroll overflow-y-auto hide-scrollbar">
-                         {
-                          data.map(item=>(
-                            <ul  key={item.id} className="grid grid-cols-12  mt-4 px-3  text-white font-normal text-xs items-center">
-                        <li className="col-span-3">
-                            <img src={item.image} alt="" className="w-12 h-12 object-cover"/>
-                        </li>
-                        <li className="col-span-3 w-20 truncate">{item.tittle}</li>
-                        <li className="col-span-3 border border-white px-3 py-1 w-fit mx-auto"> 
+            <div
+              onClick={() => setCardDropDown(!carddropdown)}
+              className="relative"
+            >
+              <GrCart className="size-[25px] cursor-pointer" />
 
-                            <button onClick={()=>handleDecrement(item)} className="mr-2">-</button>
-                            <button>{item.quantity}</button>
-                            <button onClick={()=>handleIncrement(item)} className="ml-2">+</button>
+              {carddropdown && (
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute top-10 w-[400px] z-20 -left-40 bg-gray-400 rounded-[10px] py-4"
+                >
+                  <ul className="grid grid-cols-12   pb-3 px-3  text-white font-semibold text-sm border-b">
+                    <li className="col-span-3">Image</li>
+                    <li className="col-span-3">Name</li>
+                    <li className="col-span-3"> Quantity</li>
+                    <li className="col-span-3">Subtotal</li>
+                  </ul>
+                  <div className="flex flex-col gap-y-3 w-full h-[70vh] scroll overflow-y-auto hide-scrollbar">
+                    {data.map((item) => (
+                      <ul
+                        key={item.id}
+                        className="grid grid-cols-12  mt-4 px-3  text-white font-normal text-xs items-center"
+                      >
+                        <li className="col-span-3 relative">
+                          <img
+                            src={item.image}
+                            alt=""
+                            className="w-16 h-16 object-cover "
+                          />
+                          <button
+                            onClick={()=>handledeletecart(item)}
+                            className="w-4 h-4 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-all duration-300 absolute top-0 left-0"
+                          >
+                            <IoClose className="text-2xl" />
+                          </button>
                         </li>
-                        <li className="col-span-3 w-20 truncate">$ {item.price*item.quantity}</li>
-                    </ul>
-                          ))
-                         }
-                        
+                        <li className="col-span-3 w-20 truncate">
+                          {item.tittle}
+                        </li>
+                        <li className="col-span-3 border border-white px-3 py-1 w-fit mx-auto">
+                          <button
+                            onClick={() => handleDecrement(item)}
+                            className="mr-2"
+                          >
+                            -
+                          </button>
+                          <button>{item.quantity}</button>
+                          <button
+                            onClick={() => handleIncrement(item)}
+                            className="ml-2"
+                          >
+                            +
+                          </button>
+                        </li>
+                        <li className="col-span-3 w-20 truncate">
+                          $ {item.price * item.quantity}
+                        </li>
+                      </ul>
+                    ))}
+
+                    <h5 className="text-white font-semibold font-sans absolute right-4 bottom-3">
+                      Total: $ {total}
+                    </h5>
+
+                  {
+                    data.length>0 ?
+                    <div className="flex gap-x-3 justify-center">
+                      <Link to="/card">
+                      <button className="text-white bg-red-500 py-2 px-8 rounded">Cart</button>
+                      </Link>
+                      <Link to="/checkout">
+                      <button className="text-white bg-red-500 py-2 px-8 rounded">Checkout</button>
+                      </Link>
                     </div>
-                 </div>
-                 }
-             </div>
-            
+                    :
+                    <h1 className="text-white h-full font-semibold flex justify-center items-center text-2xl">Cart Empty</h1>
+                      
+                  }
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div
               onClick={() => setDrodown(!dropdown)}
               className="relative h-[28px] w-[28px] p-1 flex justify-center items-center bg-red-500 rounded-full cursor-pointer"
@@ -135,16 +184,16 @@ const handleDecrement=(item)=>{
               <BsPerson className="text-white size-[22px]" />
 
               {dropdown && (
-                <ul  className="absolute top-9 -left-20 w-36 rounded bg-red-400 py-2 shadow-lg z-20">
-                 <Link to="/login">
-                  <li className="px-3 py-2 text-white hover:bg-red-500 cursor-pointer">
-                    Login
-                  </li>
-                 </Link>
+                <ul className="absolute top-9 -left-20 w-36 rounded bg-red-400 py-2 shadow-lg z-20">
+                  <Link to="/login">
+                    <li className="px-3 py-2 text-white hover:bg-red-500 cursor-pointer">
+                      Login
+                    </li>
+                  </Link>
                   <Link to="/signUp">
-                   <li className="px-3 py-2 text-white hover:bg-red-500 cursor-pointer">
-                    Registration
-                  </li>
+                    <li className="px-3 py-2 text-white hover:bg-red-500 cursor-pointer">
+                      Registration
+                    </li>
                   </Link>
                 </ul>
               )}
