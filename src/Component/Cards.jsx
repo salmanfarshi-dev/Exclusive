@@ -20,11 +20,14 @@ let dispatch = useDispatch()
 const handleAddCart=()=>{
    
   dispatch(CardSlice({
+    id,
     tittle:tittle,
     image:src,
     price: discount,
     quantity:1
   }))
+
+ 
 }
 
 

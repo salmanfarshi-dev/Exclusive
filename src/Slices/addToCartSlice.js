@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const addToCartSlice = createSlice({
   name: 'cart',
   initialState: {
-    cartvalue: [],
+    cartvalue: localStorage.getItem("CardSlice") ? JSON.parse (localStorage.getItem("CardSlice")): [],
     
   },
   reducers: {
@@ -19,36 +19,43 @@ export const addToCartSlice = createSlice({
 
         state.cartvalue.push({...action.payload, quantity:1})
       }
+       localStorage.setItem("CardSlice",JSON.stringify(state.cartvalue))
      
     },
 
-    incrementcart:(state,action)=>{
-      state.cartvalue.map(item=>{
-        if(item.tittle===action.payload.tittle){
-          item.quantity+=1
-        }
-      })
+   incrementcart:(state,action)=>{
+  state.cartvalue.forEach(item=>{
+    if(item.tittle===action.payload.tittle){
+      item.quantity+=1
+    }
+  })
+  localStorage.setItem("CardSlice",JSON.stringify(state.cartvalue))
+},
 
-    },
-    decrementcart:(state,action)=>{
-      state.cartvalue.map(item=>{
-        if(item.tittle===action.payload.tittle){
-        if(item.quantity>1){
-            item.quantity-=1
-        }
-        }
-      })
+decrementcart:(state,action)=>{
+  state.cartvalue.forEach(item=>{
+    if(item.tittle===action.payload.tittle){
+      if(item.quantity>1){
+        item.quantity-=1
+      }
+    }
+  })
+  localStorage.setItem("CardSlice",JSON.stringify(state.cartvalue))
+}
 
-    },
+,
+
+
+
+
+
+
     deletecart:(state,action)=>{
-      state.cartvalue.map((item, index)=>{
-        if(item.tittle===action.payload.tittle){
-          state.cartvalue.splice(index,1)
-      
-        }
-      })
-
-    },
+  state.cartvalue = state.cartvalue.filter(
+    item => item.tittle !== action.payload.tittle
+  )
+  localStorage.setItem("CardSlice", JSON.stringify(state.cartvalue))
+}
   
   },
 })

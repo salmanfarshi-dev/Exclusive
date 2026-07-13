@@ -19,8 +19,9 @@ import {
 import { IoClose } from "react-icons/io5";
 
 function Navbar() {
-  let data = useSelector((state) => state.cartitem.cartvalue);
-  console.log(data);
+  const data = useSelector((state) => state.cartitem.cartvalue);
+
+  
 
   const handleIncrement = (item) => {
     dispatch(incrementcart(item));
@@ -46,7 +47,9 @@ function Navbar() {
   data.forEach((item) => {
     total += item.price * item.quantity;
   });
-
+  
+console.log(data);
+console.log(Array.isArray(data));
   return (
     <nav className=" mt-[47px] mb-[23px] border-b pb-[16px] border-[#8282824d] ">
       <Container>
@@ -103,7 +106,7 @@ function Navbar() {
               {carddropdown && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute top-10 w-[400px] z-20 -left-40 bg-gray-400 rounded-[10px] py-4"
+                  className="absolute top-10 w-[400px] z-20 -left-40 bg-gray-400 rounded-[10px] py-4 h-[78vh]"
                 >
                   <ul className="grid grid-cols-12   pb-3 px-3  text-white font-semibold text-sm border-b">
                     <li className="col-span-3">Image</li>
@@ -111,8 +114,8 @@ function Navbar() {
                     <li className="col-span-3"> Quantity</li>
                     <li className="col-span-3">Subtotal</li>
                   </ul>
-                  <div className="flex flex-col gap-y-3 w-full h-[70vh] scroll overflow-y-auto hide-scrollbar">
-                    {data.map((item) => (
+                  <div className="flex flex-col gap-y-3 w-full h-[65vh] scroll overflow-y-auto hide-scrollbar">
+                    {data && data.map((item) => (
                       <ul
                         key={item.id}
                         className="grid grid-cols-12  mt-4 px-3  text-white font-normal text-xs items-center"
@@ -154,13 +157,13 @@ function Navbar() {
                       </ul>
                     ))}
 
-                    <h5 className="text-white font-semibold font-sans absolute right-4 bottom-3">
+                    <h5 className="text-white font-semibold font-sans absolute right-4 bottom-3 ">
                       Total: $ {total}
                     </h5>
 
-                  {
+                  {data && 
                     data.length>0 ?
-                    <div className="flex gap-x-3 justify-center">
+                    <div className="flex gap-x-3 justify-center pt-4">
                       <Link to="/card">
                       <button className="text-white bg-red-500 py-2 px-8 rounded">Cart</button>
                       </Link>
