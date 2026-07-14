@@ -17,12 +17,14 @@ import {
   incrementcart,
 } from "../Slices/addToCartSlice";
 import { IoClose } from "react-icons/io5";
+import { Wishlist } from "../Slices/Wishlist";
 
 function Navbar() {
   const data = useSelector((state) => state.cartitem.cartvalue);
-
+  const data2 = useSelector(state=>state.Wishlist.value)
   
-
+ 
+ 
   const handleIncrement = (item) => {
     dispatch(incrementcart(item));
   };
@@ -95,7 +97,10 @@ console.log(Array.isArray(data));
               />
               <FiSearch className="absolute top-3 right-8" />
             </div>
-            <AiOutlineHeart className="size-[38px]" />
+            <div className="relative">
+              <AiOutlineHeart className="size-[30px]" />
+            <p className="text-red-500 absolute -top-3 -right-1">{data2?.length}</p>
+            </div>
 
             <div
               onClick={() => setCardDropDown(!carddropdown)}

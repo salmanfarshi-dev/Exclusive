@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../Component/Button";
-import { FaRegHeart } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa6";
+import { FaRegHeart } from "react-icons/fa";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaStar } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CardSlice } from "../Slices/addToCartSlice";
+import { addwishlist } from "../Slices/Wishlist";
 
 
 function Cards({id,src, alt,badge, tittle, discount, regular,list, className,ReclassName, listClassName}) {
 
 let data= useSelector(state=>state.cartitem.cartvalue)
-console.log(data);
 
+
+const wishlistData = useSelector(state => state.Wishlist.value)
+
+
+const isWishlisted = wishlistData.some(item => item.id === id)
 
 
 let dispatch = useDispatch()
@@ -20,7 +26,7 @@ let dispatch = useDispatch()
 const handleAddCart=()=>{
    
   dispatch(CardSlice({
-    id,
+    
     tittle:tittle,
     image:src,
     price: discount,
@@ -30,6 +36,16 @@ const handleAddCart=()=>{
  
 }
 
+const handleheart=()=>{
+ 
+
+   dispatch(addwishlist({
+    id:id,
+    tittle:tittle,
+    image:src
+    
+  }))
+}
 
   return (
     <div>
@@ -41,9 +57,21 @@ const handleAddCart=()=>{
           {badge}
           </p>
           <div className="absolute flex flex-col gap-y-2 top-3 right-3">
-            <p className="size-[34px] rounded-full bg-white flex justify-center items-center">
-              <FaRegHeart className="size-6"/>
+
+
+            <p onClick={handleheart} className="size-[34px] rounded-full bg-white flex justify-center items-center">
+
+
+             {
+  isWishlisted ?
+  <FaHeart className="size-6 text-red-500"/>
+  :
+  <FaRegHeart className="size-6"/>
+}
             </p>
+
+
+
             <p className="size-[34px] rounded-full bg-white flex justify-center items-center">
              <MdOutlineRemoveRedEye className="size-6" />
 
