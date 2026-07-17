@@ -52,7 +52,10 @@ const handleheart=()=>{
       
       <div className="w-[270px] group  cursor-pointer">
         <div className="bg-[#F5F5F5] w-[270px] h-[250px] flex justify-center items-center relative rounded-[4px] overflow-hidden">
+         <Link to={`/products/${id}`}>
           <img src={src} alt={alt} />
+         
+         </Link>
           <p className={`bg-primary text-secondary py-1 px-3 text-xs font-normal rounded-[4px] absolute top-3 left-3 ${className}`}>
           {badge}
           </p>
@@ -81,7 +84,9 @@ const handleheart=()=>{
             <p className="text-white py-2">Add To Cart</p>
           </div>
         </div>
+       <Link to={`/products/${id}`}>
         <h3 className="text-[16px] font-medium text-black mt-4">{tittle}</h3>
+       </Link>
        <div className={`${listClassName}`}>
          <p className="text-primary text-[16px] font-medium my-2">${discount} <span className={`line-through text-black text-opacity-50 ml-3 ${ReclassName}`}>${regular}</span></p>
 

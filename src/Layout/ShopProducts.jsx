@@ -6,8 +6,7 @@ import Bannerlist from "../Component/Bannerlist";
 import PaginatedItems from "../Component/PaginatedItems";
 
 function ShopProducts() {
-  let prev = useSelector((state) => state.bradcrumb.previousvalue);
-  let next = useSelector((state) => state.bradcrumb.currentvalue);
+ 
 
   let [select, setSelect] = useState(6)
 
@@ -18,12 +17,7 @@ function ShopProducts() {
   return (
     <section className="pt-20 pb-[104px]">
       <Container>
-        <Nextpage
-          prevPath={prev === "Home" ? "/" : `/${prev.toLowerCase()}`}
-          prev={prev}
-          current={next}
-          className="mb-16"
-        />
+        
 
         <div className="flex">
           <div className="w-3/12">

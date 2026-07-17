@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../Component/Container";
 import Image from "../Component/Image";
 import Logo from "../assets/Logo.png";
@@ -20,11 +20,26 @@ import { IoClose } from "react-icons/io5";
 import { Wishlist } from "../Slices/Wishlist";
 
 function Navbar() {
+  let [Apidata, setApiData] = useState([]);
+  let [search, setSearch] = useState([]);
+
   const data = useSelector((state) => state.cartitem.cartvalue);
-  const data2 = useSelector(state=>state.Wishlist.value)
-  
- 
- 
+  const data2 = useSelector((state) => state.Wishlist.value);
+  const [input, setInput] = useState("");
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((data) => setApiData(data.products));
+  }, []);
+
+  const handleInput = (e) => {
+    setInput(e.target.value);
+    let alldata = Apidata.filter((item) =>
+      item.title.toLowerCase().includes(e.target.value.toLowerCase()),
+    );
+    setSearch(alldata);
+  };
+
   const handleIncrement = (item) => {
     dispatch(incrementcart(item));
   };
@@ -49,9 +64,7 @@ function Navbar() {
   data.forEach((item) => {
     total += item.price * item.quantity;
   });
-  
-console.log(data);
-console.log(Array.isArray(data));
+
   return (
     <nav className=" mt-[47px] mb-[23px] border-b pb-[16px] border-[#8282824d] ">
       <Container>
@@ -91,15 +104,48 @@ console.log(Array.isArray(data));
           <div className="flex gap-x-6 items-center">
             <div className="input-group relative w-full">
               <input
+                onChange={handleInput}
+                 value={input}
                 type="text"
                 placeholder="What are you looking for?"
                 className="py-2 px-5 bg-[#F5F5F5] border border-transparent focus:outline-none hover:border-gray-300 rounded-[4px] duration-300 placeholder:text-[12px] pr-9"
               />
               <FiSearch className="absolute top-3 right-8" />
+
+              {input.length > 0 && search.length > 0 && (
+                <div className="absolute top-10 left-0 w-full bg-white border shadow-lg rounded max-h-[400px] overflow-y-auto z-50">
+                  {search.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex justify-between items-center p-3 hover:bg-gray-100 border-b"
+                    >
+                      <Link
+                        onClick={() => {
+                          setInput("");
+                          setSearch("");
+                        }}
+                       
+                        to={`/products/${item.id}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <img
+                            src={item.thumbnail}
+                            className="w-6 h-6"
+                            alt=""
+                          />
+                          <h3 className="text-xs">{item.title}</h3>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="relative">
               <AiOutlineHeart className="size-[30px]" />
-            <p className="text-red-500 absolute -top-3 -right-1">{data2?.length}</p>
+              <p className="text-red-500 absolute -top-3 -right-1">
+                {data2?.length}
+              </p>
             </div>
 
             <div
@@ -120,66 +166,71 @@ console.log(Array.isArray(data));
                     <li className="col-span-3">Subtotal</li>
                   </ul>
                   <div className="flex flex-col gap-y-3 w-full h-[65vh] scroll overflow-y-auto hide-scrollbar">
-                    {data && data.map((item) => (
-                      <ul
-                        key={item.id}
-                        className="grid grid-cols-12  mt-4 px-3  text-white font-normal text-xs items-center"
-                      >
-                        <li className="col-span-3 relative">
-                          <img
-                            src={item.image}
-                            alt=""
-                            className="w-16 h-16 object-cover "
-                          />
-                          <button
-                            onClick={()=>handledeletecart(item)}
-                            className="w-4 h-4 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-all duration-300 absolute top-0 left-0"
-                          >
-                            <IoClose className="text-2xl" />
-                          </button>
-                        </li>
-                        <li className="col-span-3 w-20 truncate">
-                          {item.tittle}
-                        </li>
-                        <li className="col-span-3 border border-white px-3 py-1 w-fit mx-auto">
-                          <button
-                            onClick={() => handleDecrement(item)}
-                            className="mr-2"
-                          >
-                            -
-                          </button>
-                          <button>{item.quantity}</button>
-                          <button
-                            onClick={() => handleIncrement(item)}
-                            className="ml-2"
-                          >
-                            +
-                          </button>
-                        </li>
-                        <li className="col-span-3 w-20 truncate">
-                          $ {item.price * item.quantity}
-                        </li>
-                      </ul>
-                    ))}
+                    {data &&
+                      data.map((item) => (
+                        <ul
+                          key={item.id}
+                          className="grid grid-cols-12  mt-4 px-3  text-white font-normal text-xs items-center"
+                        >
+                          <li className="col-span-3 relative">
+                            <img
+                              src={item.image}
+                              alt=""
+                              className="w-16 h-16 object-cover "
+                            />
+                            <button
+                              onClick={() => handledeletecart(item)}
+                              className="w-4 h-4 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-all duration-300 absolute top-0 left-0"
+                            >
+                              <IoClose className="text-2xl" />
+                            </button>
+                          </li>
+                          <li className="col-span-3 w-20 truncate">
+                            {item.tittle}
+                          </li>
+                          <li className="col-span-3 border border-white px-3 py-1 w-fit mx-auto">
+                            <button
+                              onClick={() => handleDecrement(item)}
+                              className="mr-2"
+                            >
+                              -
+                            </button>
+                            <button>{item.quantity}</button>
+                            <button
+                              onClick={() => handleIncrement(item)}
+                              className="ml-2"
+                            >
+                              +
+                            </button>
+                          </li>
+                          <li className="col-span-3 w-20 truncate">
+                            $ {item.price * item.quantity}
+                          </li>
+                        </ul>
+                      ))}
 
                     <h5 className="text-white font-semibold font-sans absolute right-4 bottom-3 ">
                       Total: $ {total}
                     </h5>
 
-                  {data && 
-                    data.length>0 ?
-                    <div className="flex gap-x-3 justify-center pt-4">
-                      <Link to="/card">
-                      <button className="text-white bg-red-500 py-2 px-8 rounded">Cart</button>
-                      </Link>
-                      <Link to="/checkout">
-                      <button className="text-white bg-red-500 py-2 px-8 rounded">Checkout</button>
-                      </Link>
-                    </div>
-                    :
-                    <h1 className="text-white h-full font-semibold flex justify-center items-center text-2xl">Cart Empty</h1>
-                      
-                  }
+                    {data && data.length > 0 ? (
+                      <div className="flex gap-x-3 justify-center pt-4">
+                        <Link to="/card">
+                          <button className="text-white bg-red-500 py-2 px-8 rounded">
+                            Cart
+                          </button>
+                        </Link>
+                        <Link to="/checkout">
+                          <button className="text-white bg-red-500 py-2 px-8 rounded">
+                            Checkout
+                          </button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <h1 className="text-white h-full font-semibold flex justify-center items-center text-2xl">
+                        Cart Empty
+                      </h1>
+                    )}
                   </div>
                 </div>
               )}

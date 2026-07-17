@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Link } from "react-router-dom";
 
 function Banner() {
   return (
@@ -18,6 +19,7 @@ function Banner() {
       <Container>
         <div className="flex ">
           <div className="w-3/12 relative after:content-[''] after:w-[2px] after:bg-[#8282824d] after:h-[400px] after:absolute after:-top-[63px] after:right-10">
+           <Link to="/shop">
             <div className="flex flex-col gap-y-[16px]">
               <Bannerlist
                 type="true"
@@ -38,6 +40,7 @@ function Banner() {
               <Bannerlist text="Groceries & Pets" />
               <Bannerlist text="Health & Beauty" />
             </div>
+           </Link>
           </div>
 
           <div className="w-9/12">
