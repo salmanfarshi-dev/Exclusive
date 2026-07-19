@@ -4,6 +4,10 @@ import Cards from "../Component/Cards";
 import axios from "axios";
 
 function Items({ currentItems }) {
+
+
+
+  
   return (
     <>
      <div className="flex flex-wrap gap-8">
@@ -12,6 +16,7 @@ function Items({ currentItems }) {
           <div key={item.id}>
             
             <Cards
+             id={item.id}
               src={item.thumbnail}
               tittle={item.title}
               regular={item.price}

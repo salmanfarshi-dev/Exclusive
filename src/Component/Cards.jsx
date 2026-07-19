@@ -75,10 +75,7 @@ const handleheart=()=>{
 
 
 
-            <p className="size-[34px] rounded-full bg-white flex justify-center items-center">
-             <MdOutlineRemoveRedEye className="size-6" />
-
-            </p>
+           
           </div>
           <div onClick={handleAddCart} className="w-full bg-black rounded-b-[4px] absolute bottom-[-40px] left-0 text-center group-hover:bottom-0 duration-300">
             <p className="text-white py-2">Add To Cart</p>

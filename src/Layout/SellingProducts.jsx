@@ -1,48 +1,62 @@
-import Today from "../Component/Today";
+import React, { useRef, useState, useEffect } from "react";
 import Container from "../Component/Container";
-import React from "react";
+import Today from "../Component/Today";
 import Subheading from "../Component/Subheading";
-import Button from "../Component/Button";
 import Cards from "../Component/Cards";
-import Coat from "../assets/coat.png";
-import Bag from "../assets/bag.png";
-import Cpu from "../assets/cpu.png";
-import Bookself from "../assets/booksells.png";
-import { useState } from "react";
-import BestSellingApi from '../BestSellingApi'
+import Button from "../Component/Button";
+import { useParams } from "react-router-dom";
 
 function SellingProducts() {
 
-  let [show, setShow] = useState(4)
+   let [data, setData] = useState([]);
+  let [show, setShow] = useState(4);
+
+  let param = useParams()
+
+  // back er api use 
+
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((data) => setData(data.products));
+  }, []);
+
   return (
-    <section>
+    <section className="mb-[168px]">
       <Container>
-        <Today text="This Month" />
-        <div className="flex justify-between items-center mt-5">
-          <Subheading text="Best Selling Products" />
-          {
-            show<BestSellingApi.length && <Button onClick={()=>setShow(show+4)} text="View All" />
-          }
+        <Today text="Categories" />
+        <div className="flex justify-between items-center">
+          <Subheading text="Browse By Category" className="mt-5" />
+
+          <div className=" text-center">
+          {show < data.length && (
+            <Button
+              onClick={() => setShow(show + 26)}
+              text="View All "
+            />
+          )}
         </div>
 
-        <div className="flex justify-between items-center mt-16 mb-[140px]">
-           <div className="flex flex-wrap justify-between gap-6">
-  {BestSellingApi.slice(0, show).map((item) => (
-    <Cards
-    className="hidden"
-      key={item.id}
-      src={item.image}
-      tittle={item.tittle}
-      
-      discount={item.discount}
-      regular={item.regular}
-      list={item.list}
-    />
-  ))}
-</div>
          
         </div>
-      </Container>
+
+        <div className="mt-16 flex justify-between items-center w-full">
+          <div className="flex flex-wrap  items-center gap-[30px]">
+            {data.slice(0, show).map((item) => (
+              <Cards
+                id={item.id}
+                src={item.thumbnail}
+                tittle={item.title}
+                regular={item.price}
+                discount={item.discountPercentage}
+                list={item.stock}
+                badge="-35%"
+              />
+            ))}
+          </div>
+        </div>
+              </Container>
     </section>
   );
 }

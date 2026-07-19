@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useRef, useState } from "react";
 import Container from "../Component/Container";
 import Image from "../Component/Image";
 import Logo from "../assets/Logo.png";
@@ -22,7 +22,7 @@ import { Wishlist } from "../Slices/Wishlist";
 function Navbar() {
   let [Apidata, setApiData] = useState([]);
   let [search, setSearch] = useState([]);
-
+ const cartRef = useRef(null);
   const data = useSelector((state) => state.cartitem.cartvalue);
   const data2 = useSelector((state) => state.Wishlist.value);
   const [input, setInput] = useState("");
@@ -64,6 +64,21 @@ function Navbar() {
   data.forEach((item) => {
     total += item.price * item.quantity;
   });
+
+
+  useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (cartRef.current && !cartRef.current.contains(e.target)) {
+      setCardDropDown(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
 
   return (
     <nav className=" mt-[47px] mb-[23px] border-b pb-[16px] border-[#8282824d] ">
@@ -110,7 +125,7 @@ function Navbar() {
                 placeholder="What are you looking for?"
                 className="py-2 px-5 bg-[#F5F5F5] border border-transparent focus:outline-none hover:border-gray-300 rounded-[4px] duration-300 placeholder:text-[12px] pr-9"
               />
-              <FiSearch className="absolute top-3 right-8" />
+              <FiSearch className="absolute top-3 right-4" />
 
               {input.length > 0 && search.length > 0 && (
                 <div className="absolute top-10 left-0 w-full bg-white border shadow-lg rounded max-h-[400px] overflow-y-auto z-50">
@@ -143,7 +158,7 @@ function Navbar() {
             </div>
             <div className="relative">
               <AiOutlineHeart className="size-[30px]" />
-              <p className="text-red-500 absolute -top-3 -right-1">
+              <p className="bg-red-500 rounded-full w-4 h-4 flex justify-center items-center text-xs text-white absolute -top-1 -right-1">
                 {data2?.length}
               </p>
             </div>
@@ -156,7 +171,8 @@ function Navbar() {
 
               {carddropdown && (
                 <div
-                  onClick={(e) => e.stopPropagation()}
+                 ref={cartRef}
+                  onClick={() => setCardDropDown(!carddropdown)}
                   className="absolute top-10 w-[400px] z-20 -left-40 bg-gray-400 rounded-[10px] py-4 h-[78vh]"
                 >
                   <ul className="grid grid-cols-12   pb-3 px-3  text-white font-semibold text-sm border-b">

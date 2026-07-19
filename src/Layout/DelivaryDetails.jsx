@@ -11,11 +11,28 @@ import Bkash from '../assets/bkash.png'
 import Nogat from '../assets/nogat.png'
 import MasterCard from '../assets/mastercard.png'
 import { useSelector } from "react-redux";
+
 import Nextpage from '../Component/Nextpage'
+import { Link } from "react-router-dom";
 
 function DelivaryDetails() {
+
+  
     let prev = useSelector((state)=>(state.bradcrumb.previousvalue));
   let next = useSelector((state)=>(state.bradcrumb.currentvalue));
+
+
+  const cartData = useSelector((state) => state.cartitem.cartvalue);
+
+let total = 0;
+
+cartData.forEach((item) => {
+  total += item.price * item.quantity;
+});
+
+
+
+
   return (
     <section className="mt-20 mb-[140px]">
       <Container>
@@ -90,25 +107,37 @@ function DelivaryDetails() {
           <div className=" col-span-6">
             <div className="w-[500px]">
                 <div className="flex flex-col gap-y-8">
-                <div className="flex justify-between items-center">
-                    <div className="flex gap-x-6 items-center">
-                        <Image src={Gamepad} className="w-[54px] h-[54]"/>
-                        <p className="text-[16px] font-normal text-black">Gamepad</p>
-                    </div>
-                    <p className="text-[16px]  font-normal text-black">$ 660</p>
-                </div>
-                <div className="flex justify-between items-center">
-                    <div className="flex gap-x-6 items-center">
-                        <Image src={Monitor} className="w-[54px] h-[54]"/>
-                        <p className="text-[16px] font-normal text-black">LCD Monitor</p>
-                    </div>
-                    <p className="text-[16px]  font-normal text-black">$ 1100</p>
+                <div className="flex flex-col gap-y-4">
+                    
+                  {cartData.map((item) => (
+  <div
+    key={item.id}
+    className="flex justify-between items-center"
+  >
+    <div className="flex gap-x-6 items-center">
+      <img
+        src={item.image}
+        className="w-[54px] h-[54px] object-cover"
+      />
+
+      <p className="text-[16px] font-normal text-black">
+        {item.tittle}
+      </p>
+    </div>
+
+    <p className="text-[16px] font-normal text-black">
+      ${item.price * item.quantity}
+    </p>
+  </div>
+))}
+               
+                   
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-black border-opacity-75">
                     <div className="flex gap-x-6 items-center">
                         <p className="text-[16px] font-normal text-black">Subtotal:</p>
                     </div>
-                    <p className="text-[16px]  font-normal text-black">$ 1100</p>
+                    <p className="text-[16px]  font-normal text-black">${total}</p>
                 </div>
                 <div className="flex justify-between items-center pb-4 border-b border-black border-opacity-75">
                     <div className="flex gap-x-6 items-center">
@@ -120,7 +149,7 @@ function DelivaryDetails() {
                     <div className="flex gap-x-6 items-center">
                         <p className="text-[16px] font-normal text-black">Total:</p>
                     </div>
-                    <p className="text-[16px]  font-normal text-black">$1750</p>
+                    <p className="text-[16px]  font-normal text-black">${total}</p>
                 </div>
                 <div className="flex justify-between  items-center">
                     <div className="flex gap-x-6 items-center">
@@ -151,7 +180,9 @@ function DelivaryDetails() {
 
                     <Button text="Apply Coupon" className="!py-3"/>
                 </div>
+                <Link to="/signUp">
                 <Button text="Place Order" className="w-fit"/>
+                </Link>
             </div>
             </div>
           </div>

@@ -39,7 +39,7 @@ let [eye, setEye] = useState(false);
 
         toast.success("Login successfully")
         setTimeout(() => {
-          navigate("/home")
+          navigate("/checkout")
           
         }, 2000);
       }else{

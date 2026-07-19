@@ -1,44 +1,52 @@
-import Subheading from "../Component/Subheading";
+import React, { useRef, useState, useEffect } from "react";
+import Container from "../Component/Container";
 import Today from "../Component/Today";
-import React, { useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
+import Subheading from "../Component/Subheading";
 import Cards from "../Component/Cards";
 import Button from "../Component/Button";
-import Container from "../Component/Container";
-import Arrow from "../Component/Arrow";
-import ApiData from "../ApiData";
+import { useParams } from "react-router-dom";
 
 function FlashSales() {
+  let [data, setData] = useState([]);
   let [show, setShow] = useState(4);
+
+  let param = useParams()
+
+  // back er api use 
+
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((data) => setData(data.products));
+  }, []);
+
   return (
-    <section className="mb-20">
+    <section className="mb-[168px]">
       <Container>
         <Today text="Today’s" />
-        <div className="flex items-center justify-between">
-          <Subheading text="Flash Sales" className="mt-6" />
+        <div className="flex justify-between items-center">
+          <Subheading text="Flash Sales" className="mt-5" />
+         
         </div>
 
-        <div className="mt-10 flex justify-between items-center">
-          <div className="flex justify-between flex-wrap gap-6">
-            {ApiData.slice(0, show).map((item) => (
+        <div className="mt-16 flex justify-between items-center w-full">
+          <div className="flex flex-wrap  items-center gap-[30px]">
+            {data.slice(0, show).map((item) => (
               <Cards
-                key={item.id}
-                src={item.image}
-                tittle={item.tittle}
-                badge={item.badge}
-                discount={item.discount}
-                regular={item.regular}
-                list={item.list}
+                id={item.id}
+                src={item.thumbnail}
+                tittle={item.title}
+                regular={item.price}
+                discount={item.discountPercentage}
+                list={item.stock}
+                badge="-40%"
               />
             ))}
           </div>
         </div>
-        <div className="text-center mt-16 pb-16 border-b border-[#8282824d]">
-          {show < ApiData.length && (
+        <div className="mt-16 text-center">
+          {show < data.length && (
             <Button
               onClick={() => setShow(show + 4)}
               text="View All Products"
