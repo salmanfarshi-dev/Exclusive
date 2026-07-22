@@ -105,8 +105,8 @@ data.forEach((item) => {
 
           <div className="flex justify-between items-start">
             <div className="flex gap-x-4 items-center">
-              <Input placeholder="Coupon Code" className="w-[230px] py-4 px-4 text-[16px] border border-black/80 rounded-[4px]"/>
-              <button className="bg-primary text-white font-poppins py-[16px] px-[48px] rounded-[4px] text-[16px] ">Apply Coupon</button>
+              <Input placeholder="Coupon Code" className="w-[200px] py-4 px-4 text-[16px] border border-black/80 rounded-[4px]"/>
+              <button className="bg-primary text-white font-poppins py-[16px] px-[40px] rounded-[4px] text-[16px] ">Apply Coupon</button>
 
             </div>
 
